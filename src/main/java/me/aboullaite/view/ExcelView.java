@@ -10,14 +10,13 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.Map;
 
-public class ExcelView extends AbstractXlsView{
+public class ExcelView extends AbstractXlsView {
 
     @Override
     protected void buildExcelDocument(Map<String, Object> model,
                                       Workbook workbook,
                                       HttpServletRequest request,
                                       HttpServletResponse response) throws Exception {
-
         // change the file name
         response.setHeader("Content-Disposition", "attachment; filename=\"my-xls-file.xls\"");
 
@@ -37,7 +36,6 @@ public class ExcelView extends AbstractXlsView{
         font.setBold(true);
         font.setColor(HSSFColor.WHITE.index);
         style.setFont(font);
-
 
         // create header row
         Row header = sheet.createRow(0);
@@ -59,13 +57,10 @@ public class ExcelView extends AbstractXlsView{
         header.getCell(7).setCellStyle(style);
         header.createCell(8).setCellValue("Phone Number");
         header.getCell(8).setCellStyle(style);
-
-
-
         int rowCount = 1;
 
-        for(User user : users){
-            Row userRow =  sheet.createRow(rowCount++);
+        for (User user : users) {
+            Row userRow = sheet.createRow(rowCount++);
             userRow.createCell(0).setCellValue(user.getFirstName());
             userRow.createCell(1).setCellValue(user.getLastName());
             userRow.createCell(2).setCellValue(user.getAge());
@@ -75,9 +70,6 @@ public class ExcelView extends AbstractXlsView{
             userRow.createCell(6).setCellValue(user.getCity());
             userRow.createCell(7).setCellValue(user.getCountry());
             userRow.createCell(8).setCellValue(user.getPhoneNumber());
-
-            }
-
+        }
     }
-
 }
